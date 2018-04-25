@@ -1,6 +1,9 @@
 
 
-function feature_vectors = harris_features(k, threshold, X, patch_size) 
+function feature_vectors = harris_features(k, threshold, X, patch_size, p) 
+
+    
+     
 
     [rows, columns] = size(Ig); 
     
@@ -43,11 +46,23 @@ function feature_vectors = harris_features(k, threshold, X, patch_size)
     % aggregate all local minima 
     non_max_out = i_mask > imdilate(i_mask, [1 1 1; 1 0 1; 1 1 1]);
     
-    [x , y] = find(non_max_out);
-    [feature_length,~] =  size(x);
+    [y , x] = find(non_max_out);
+   
     
-    features_vector = zeros(feature_length, patch_size, patch_size);
     
+    y = y(1:p);
+    x = x(1:p);
+    
+    
+    
+    features_vectors = zeros(p, patch_size, patch_size);
+    
+    
+    for i = 1:p
+        
+        feature_vectors(i,:,:) = X(x(i)-patch_size:x(i)+patch_size,y(i)-patch_size:y(i)+patch_size);
+        
+    end 
     
     
     
