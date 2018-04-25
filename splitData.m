@@ -1,16 +1,21 @@
-
+%Function to split the data radomly accoding to a percentage
 function [trainDataX,trainDataY,testDataX,testDataY] = splitData(X,Y,testPercent)
-
-    dataSize = size(X,1);
-    DataPercent = round(testPercent*dataSize);
-    idx = randperm(dataSize);
-    indexToTest = (idx<=DataPercent);
-    indexToTrain = (idx>DataPercent);
-
-    trainDataX = X(indexToTrain,:);
-    trainDataY = Y(indexToTrain);
-
-    testDataX = X(indexToTest,:);
-    testDataY = Y(indexToTest);
-
+    
+        %Obtain N of the data
+        dataSize = size(X,1);
+        
+        %Obtain the desired % of the data for test
+        DataPercent = round(testPercent*dataSize);
+        
+        %creates a random order of numbers from 1 to N
+        idx = randperm(dataSize);
+        
+        %store x% of the total data as test
+        testDataX = X(idx(1:DataPercent),:);
+        testDataY = Y(idx(1:DataPercent));
+        
+        %store 100-x% of the total data as train
+        trainDataX = X(idx(DataPercent+1:end),:);
+        trainDataY = Y(idx(DataPercent+1:end));
+        
 end
