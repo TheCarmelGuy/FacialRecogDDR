@@ -1,15 +1,15 @@
 
 
-function feature_vectors = harris_features(k, threshold, X, patch_size, p) 
+function features_vectors = harris_features(k, threshold, X, patch_size, p) 
 
     
-     
-
-    [rows, columns] = size(Ig); 
+    
+%     patch_size = patch_size - 2
+    [rows, columns] = size(X); 
     
 
     %compute dirivatives with respect to both directions 
-    [Ix, Iy] = imgradientxy(Ig);
+    [Ix, Iy] = imgradientxy(X);
 
     Ix2 = Ix.*Ix;
     Iy2 = Iy.*Iy;
@@ -17,6 +17,7 @@ function feature_vectors = harris_features(k, threshold, X, patch_size, p)
 
     %Convolve three images with a gaussian
 
+    gaussian = gaussian2d(5,1); %gaussian filter
     smooth_xx = conv2(gaussian,Ix2);
     smooth_yy = conv2(gaussian,Iy2);
     smooth_xy = conv2(gaussian,Ixy);   
@@ -55,20 +56,16 @@ function feature_vectors = harris_features(k, threshold, X, patch_size, p)
     
     
     
-    features_vectors = zeros(p, patch_size, patch_size);
+%     features_vectors = zeros(p, 2*patch_size+1, 2*patch_size+1);
     
     
     for i = 1:p
         
-        feature_vectors(i,:,:) = X(x(i)-patch_size:x(i)+patch_size,y(i)-patch_size:y(i)+patch_size);
+        features_vectors(i,:,:) = X(x(i)-patch_size:x(i)+patch_size,y(i)-patch_size:y(i)+patch_size);
         
     end 
     
-    
-    
-    
-    
-    
+ 
     
 
 end
