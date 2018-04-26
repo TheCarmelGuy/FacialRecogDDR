@@ -9,4 +9,4 @@ Machine Learning Project- Investigating Multi-Class Classification Problems with
 
 - PCA module
 - Harris Corner module
-- KNN Module
+- KNNgus module
