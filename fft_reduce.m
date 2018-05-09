@@ -1,3 +1,8 @@
+% --------------------------------------------------------------------
+% Lehigh University - CSE
+% CSE 326 - Machine Learning
+% Komel Merchant
+% -------------------------------------------------------------------
 function fft_set =  fft_reduce(X, p_size)
     
     half_path = (p_size-1)/2;
